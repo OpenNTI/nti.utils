@@ -13,15 +13,15 @@ py_impl = getattr(platform, 'python_implementation', lambda: None)
 IS_PYPY = py_impl() == 'PyPy'
 
 TESTS_REQUIRE = [
-    'nose >= 1.3.0',
+    'nose',
     'nose2[coverage_plugin]',
     'nose-timer',
-    'nose-progressive >= 1.5',
-    'nose-pudb >= 0.1.2',
-    'pyhamcrest >= 1.8.0',
-    'zope.testing >= 4.1.2',
-    'nti.nose_traceback_info',
+    'nose-progressive',
+    'nose-pudb',
+    'pyhamcrest',
+    'zope.testing',
     'nti.testing',
+    'nti.nose_traceback_info',
 ]
 
 setup(
@@ -83,7 +83,8 @@ setup(
         'pywikipedia',
 	],
     dependency_links=[
-        'git+https://github.com/NextThought/nti.schema.git#egg=nti.schema'
+        'git+https://github.com/NextThought/nti.schema.git#egg=nti.schema',
+        'git+https://github.com/NextThought/nti.nose_traceback_info.git#egg=nti.nose_traceback_info'
     ],
 	entry_points=entry_points
 )
