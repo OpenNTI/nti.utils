@@ -12,6 +12,18 @@ import platform
 py_impl = getattr(platform, 'python_implementation', lambda: None)
 IS_PYPY = py_impl() == 'PyPy'
 
+TESTS_REQUIRE = [
+    'nose >= 1.3.0',
+    'nose2[coverage_plugin]',
+    'nose-timer',
+    'nose-progressive >= 1.5',
+    'nose-pudb >= 0.1.2',
+    'pyhamcrest >= 1.8.0',
+    'zope.testing >= 4.1.2',
+    'nti.nose_traceback_info',
+    'nti.testing',
+]
+
 setup(
     name='nti.utils',
     version=VERSION,
@@ -33,6 +45,7 @@ setup(
 	packages=find_packages('src'),
 	package_dir={'': 'src'},
 	namespace_packages=['nti'],
+    tests_require=TESTS_REQUIRE,
 	install_requires=[
 		'setuptools',
         'Acquisition' if not IS_PYPY else '',
@@ -51,6 +64,7 @@ setup(
         'pycrypto' if not IS_PYPY else '',
          # 'scipy' if not IS_PYPY else '', # don't include it yet
         'transaction',
+        'z3c.baseregistry',
         'zope.annotation',
         'zope.browserresource',
         'zope.cachedescriptors',
@@ -61,6 +75,7 @@ setup(
         'zope.deprecation',
         'zope.dottedname',
         'zope.interface',
+        'zope.proxy',
         'zope.schema',
         'zope.vocabularyregistry',
          # nti deps
