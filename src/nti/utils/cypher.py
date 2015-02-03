@@ -10,11 +10,13 @@ __docformat__ = "restructuredtext en"
 logger = __import__('logging').getLogger(__name__)
 
 import base64
+import warnings
 
 try:
 	from Crypto.Cipher import XOR
 except:
-	XOR = None
+	XOR = None 
+	warnings.warn('Please install pycrypto')
 
 DEFAULT_PASSPHRASE = base64.b64decode('TjN4dFRoMHVnaHQhIUM=')
 

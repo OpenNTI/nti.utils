@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Sort utilities
-
 .. $Id$
 """
 
@@ -10,25 +8,9 @@ __docformat__ = "restructuredtext en"
 
 logger = __import__('logging').getLogger(__name__)
 
-from itertools import ifilter, tee
-
-def isorted(iterable, comparator=None):
-	"""
-	generator-based quicksort.
-	
-	http://code.activestate.com/recipes/280501-lazy-sorting/
-	"""
-	try:
-		iterable = iter(iterable)
-		pivot = iterable.next()
-	except (TypeError, StopIteration):
-		return
-
-	comparator = comparator if comparator else lambda x,y: x < y
-		
-	a, b = tee(iterable)
-	for x in isorted(ifilter(lambda x: comparator(x, pivot), a), comparator):
-		yield x
-	yield pivot
-	for x in isorted(ifilter(lambda x: not comparator(x, pivot), b), comparator):
-		yield x
+import zope.deferredimport
+zope.deferredimport.initialize()
+zope.deferredimport.deprecatedFrom(
+	"Moved to nti.common",
+	"nti.common.iterables",
+	"isorted")

@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-For producing a JSON schema appropriate for use by clients, based on a Zope schema.
-
 .. $Id$
 """
 

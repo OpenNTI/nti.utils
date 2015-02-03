@@ -184,7 +184,6 @@ class WiktionaryDumpHandler(ContentHandler):
 			self.markup.append(data)
 
 def main(args=None):
-
 	_lang_map = {x:x for x in marker_langs.keys()}
 	_action_map = {'generate': 0, 'lookup': 1 }
 

@@ -11,9 +11,9 @@ logger = __import__('logging').getLogger(__name__)
 
 from zope.schema.interfaces import InvalidURI
 
-from nti.schema.field import ValidURI as _ValidURI
+from nti.common import dataurl
 
-from . import dataurl
+from nti.schema.field import ValidURI as _ValidURI
 
 class DataURI(_ValidURI):
 	"""

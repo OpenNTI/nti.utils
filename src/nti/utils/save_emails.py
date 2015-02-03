@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Utilities for working with various kinds of transparent proxies.
-
 .. $Id$
 """
 

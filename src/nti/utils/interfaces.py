@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*
 """
-util interfaces
-
 .. $Id: interfaces.py 22564 2013-08-12 11:13:26Z carlos.sanchez $
 """
 

@@ -43,7 +43,7 @@ except ImportError:
 	def aq_proxied():
 		return IM()
 
-from nti.utils.proxy import removeAllProxies
+from nti.common.proxy import removeAllProxies
 
 from nti.testing.matchers import aq_inContextOf
 

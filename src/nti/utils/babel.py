@@ -33,7 +33,7 @@ def _extract_from(extractor,fileobj, keywords, comment_tags, options):
 	# it passes _, but python.py needs to see that as parse_translationstring
 	messages = extractor()(fileobj.name, _FakeOptions(), fileobj=fileobj)
 	for message in messages:
-		#lineno, funcname, messages, comments
+		# lineno, funcname, messages, comments
 		yield message.location[1], None, message.msgid, message.comment
 
 def extract_python(fileobj, keywords, comment_tags, options):
