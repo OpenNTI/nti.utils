@@ -13,11 +13,11 @@ logger = __import__('logging').getLogger(__name__)
 
 from zope import interface
 
+from nti.common.property import alias
+
 from nti.schema.schema import EqHash
 from nti.schema.schema import SchemaConfigured
 from nti.schema.fieldproperty import createDirectFieldProperties
-
-from .property import alias
 
 from .interfaces import ILDAP
 
