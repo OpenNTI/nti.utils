@@ -20,6 +20,7 @@ TESTS_REQUIRE = [
 	'nose-pudb',
 	'pyhamcrest',
 	'zope.testing',
+	'nti.nose_traceback_info',
 	'nti.testing'
 ]
 
@@ -74,8 +75,7 @@ setup(
 		'zope.vocabularyregistry',
 		'nti.common',
 		'nti.schema',
-		'nti.nose_traceback_info',
-		'pywikipedia',
+		'pywikipedia'
 	],
 	extras_require={
 		'test': TESTS_REQUIRE,
