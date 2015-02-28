@@ -74,6 +74,7 @@ setup(
 		'zope.schema',
 		'zope.vocabularyregistry',
 		'nti.common',
+		'nti.dataserver.core',
 		'nti.schema',
 		'pywikipedia'
 	],
