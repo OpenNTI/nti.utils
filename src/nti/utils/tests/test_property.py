@@ -24,7 +24,6 @@ class TestProperty(unittest.TestCase):
 	
 		@interface.implementer(an_interfaces.IAnnotations)
 		class X(dict):
-	
 			the_alias = annotation_alias( 'the.key', delete=True, default=1 )
 	
 		x = X()
