@@ -31,10 +31,11 @@ try:
 except ImportError:
 	class Base(object):
 		pass
+Base = Base # pylint
 
 try:
 	from Acquisition import aq_base
-except ImportError: # pypy?
+except ImportError:
 	def aq_base( o ):
 		return o
 
@@ -59,3 +60,7 @@ except ImportError:
 		class Greenlet(object):
 			pass
 	from time import sleep
+
+slee = sleep
+Queue = Queue
+Greenlet = Greenlet

@@ -14,7 +14,7 @@ import warnings
 
 try:
 	from Crypto.Cipher import XOR
-except:
+except ImportError:
 	XOR = None 
 	warnings.warn('Please install pycrypto')
 

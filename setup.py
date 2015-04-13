@@ -42,6 +42,7 @@ setup(
 		'Programming Language :: Python :: 2',
 		'Programming Language :: Python :: 2.7',
 		'Programming Language :: Python :: Implementation :: CPython',
+		'Programming Language :: Python :: Implementation :: PyPy'
 	],
 	packages=find_packages('src'),
 	package_dir={'': 'src'},
@@ -49,7 +50,7 @@ setup(
 	tests_require=TESTS_REQUIRE,
 	install_requires=[
 		'setuptools',
-		'Acquisition' if not IS_PYPY else '',
+		'Acquisition',
 		'Babel',
 		'ExtensionClass',
 		'gevent' if not IS_PYPY else '',
