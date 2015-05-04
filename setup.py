@@ -58,7 +58,6 @@ setup(
 		'lingua',
 		'numpy' if not IS_PYPY else '',
 		'plone.i18n',
-		'pycrypto' if not IS_PYPY else '',
 		'zope.annotation',
 		'zope.component',
 		'zope.configuration',
