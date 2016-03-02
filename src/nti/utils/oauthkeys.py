@@ -13,16 +13,17 @@ from zope import interface
 
 from nti.common.property import alias
 
-from nti.schema.schema import EqHash
-from nti.schema.schema import SchemaConfigured
 from nti.schema.fieldproperty import createDirectFieldProperties
 
-from .cypher import get_plaintext
+from nti.schema.schema import EqHash
+from nti.schema.schema import SchemaConfigured
 
-from .interfaces import IOAuthKeys
+from nti.utils.cypher import get_plaintext
 
-@interface.implementer(IOAuthKeys)
+from nti.utils.interfaces import IOAuthKeys
+
 @EqHash('APIKey', 'SecretKey')
+@interface.implementer(IOAuthKeys)
 class OAuthKeys(SchemaConfigured):
 	createDirectFieldProperties(IOAuthKeys)
 	

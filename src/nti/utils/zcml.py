@@ -17,12 +17,15 @@ import functools
 
 from zope import schema
 from zope import interface
-from zope.configuration import fields
+
 from zope.component.zcml import utility
 
-from . import ldap
-from . import oauthkeys
-from . import interfaces as util_interfaces
+from zope.configuration import fields
+
+from nti.utils import ldap
+from nti.utils import oauthkeys
+from nti.utils.interfaces import ILDAP
+from nti.utils.interfaces import IOAuthKeys
 
 BASE_64 = u'base64'
 URL_QUOTE = u'urlquote'
@@ -40,8 +43,8 @@ class IRegisterLDAP(interface.Interface):
 	encoding = fields.TextLine(title="Password encoding", required=False)
 	backupURL = fields.TextLine(title="ldap backup url", required=False)
 	
-def registerLDAP(_context, id, url, username, password, baseDN=None, encoding=None,
-				 backupURL=None):
+def registerLDAP(_context, id, url, username, password, baseDN=None, 
+				 encoding=None, backupURL=None):
 	"""
 	Register an ldap
 	"""
@@ -52,9 +55,10 @@ def registerLDAP(_context, id, url, username, password, baseDN=None, encoding=No
 		password = base64.decodestring(password)
 
 	factory = functools.partial(ldap.LDAP, ID=id, URL=url, Username=username,
-								Password=password, BaseDN=baseDN, BackupURL=backupURL)
+								Password=password, BaseDN=baseDN, 
+								BackupURL=backupURL)
 
-	utility(_context, provides=util_interfaces.ILDAP, factory=factory, name=id)
+	utility(_context, provides=ILDAP, factory=factory, name=id)
 
 
 class IRegisterOAuthKeys(interface.Interface):
@@ -67,4 +71,4 @@ class IRegisterOAuthKeys(interface.Interface):
 
 def registerOAuthKeys(_context, apiKey, secretKey, id=u''):
 	factory = functools.partial(oauthkeys.OAuthKeys, APIKey=apiKey, SecretKey=secretKey)
-	utility(_context, provides=util_interfaces.IOAuthKeys, factory=factory, name=id)
+	utility(_context, provides=IOAuthKeys, factory=factory, name=id)

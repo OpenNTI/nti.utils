@@ -15,16 +15,17 @@ from zope import interface
 
 from nti.common.property import alias
 
-from nti.schema.schema import EqHash
-from nti.schema.schema import SchemaConfigured
 from nti.schema.fieldproperty import createDirectFieldProperties
 
-from .interfaces import ILDAP
+from nti.schema.schema import EqHash
+from nti.schema.schema import SchemaConfigured
 
-from .cypher import get_plaintext
+from nti.utils.cypher import get_plaintext
 
-@interface.implementer(ILDAP)
+from nti.utils.interfaces import ILDAP
+
 @EqHash('ID')
+@interface.implementer(ILDAP)
 class LDAP(SchemaConfigured):
 	createDirectFieldProperties(ILDAP)
 
