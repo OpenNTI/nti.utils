@@ -16,7 +16,10 @@ __docformat__ = "restructuredtext en"
 
 logger = __import__('logging').getLogger(__name__)
 
+import os
+
 from abc import ABCMeta
+from six import string_types
 
 try:
 	from cStringIO import StringIO
@@ -60,17 +63,21 @@ class AbstractPDFExtractor(object):
 
 	def __init__(self, data):
 		if hasattr(data, "read"):
-			self.data = data.read()
+			self._data = data.read()
 		else:
-			self.data = data
+			self._data = data
 
-	def _fixPdf(self, data):
+	def _fix_pdf(self, data):
 		try:
 			result = data + '\n%%EOF\n'
 			return result
 		except Exception:
 			logger.error('Unable to fix pdf file.')
 			return data
+
+	@property
+	def data(self):
+		return self._data
 
 	@Lazy
 	def pdf(self):
@@ -79,7 +86,7 @@ class AbstractPDFExtractor(object):
 			result = PdfFileReader(StringIO(self.data))
 		except Exception:
 			logger.warn('Error opening pdf file, trying to fix it...')
-			fixed_data = self._fixPdf(self.data)
+			fixed_data = self._fix_pdf(self.data)
 
 			# try to reopen the pdf file again
 			try:
@@ -110,7 +117,6 @@ class AbstractPDFExtractor(object):
 		return data
 
 	def get_thumbnails(self, page_start=0, pages=1):
-
 		thumb_size = (self.thumbnail_width, self.thumbnail_length)
 		preview_size = (self.preview_width, self.preview_length)
 
@@ -149,6 +155,7 @@ class AbstractPDFExtractor(object):
 						   quality=self.img_thumb_quality,
 						   optimize=self.img_thumb_optimize,
 						   progressive=self.img_thumb_progressive)
+			raw_image_thumb.seek(0)
 
 			# use PIL to generate preview from image_result
 			img_preview = Image.open(StringIO(raw_image))
@@ -160,6 +167,7 @@ class AbstractPDFExtractor(object):
 							 quality=self.img_preview_quality,
 							 optimize=self.img_preview_optimize,
 							 progressive=self.img_preview_progressive)
+			raw_image_preview.seek(0)
 
 			# add the objects to the images dict
 			images[image_id] = (image_id, image_title, raw_image_preview)
@@ -209,3 +217,26 @@ class AbstractPDFExtractor(object):
 						'Error Code: %s', return_code)
 			image_result = None
 		return image_result
+
+class FilePDFExtractor(AbstractPDFExtractor):
+
+	def __init__(self, data):
+		super(FilePDFExtractor, self).__init__(data)
+		assert isinstance(data, string_types)
+
+	@property
+	def data(self):
+		with open(self._data, "rb") as fp:
+			result = fp.read()
+		return result
+
+	def save_thumbnails(self, page_start=0, pages=1, path=None):
+		name = os.path.splitext(os.path.split(self._data)[1])[0]
+		path = os.path.split(self._data)[0] if not path else path
+		for image_id, value in self.get_thumbnails(page_start, pages).items():
+			if not image_id.endswith('_thumb'):
+				continue
+			out_file = '%s_%s.png' % (name, image_id)
+			out_file = os.path.join(path, out_file)
+			with open(out_file, "wb") as fp:
+				fp.write(value[2].read())
