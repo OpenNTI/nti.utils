@@ -7,6 +7,8 @@
 Adapted from collective.pdfpeek 2.0.0
 https://pypi.python.org/pypi/collective.pdfpeek/2.0.0
 
+ghostscript is required 
+
 """
 
 from __future__ import print_function, unicode_literals, absolute_import, division
