@@ -7,7 +7,7 @@
 Adapted from collective.pdfpeek 2.0.0
 https://pypi.python.org/pypi/collective.pdfpeek/2.0.0
 
-ghostscript is required 
+either ghostscript or convert is required 
 
 """
 
@@ -17,9 +17,10 @@ __docformat__ = "restructuredtext en"
 logger = __import__('logging').getLogger(__name__)
 
 import os
+import shutil
+import tempfile
 
 from abc import ABCMeta
-from six import string_types
 
 try:
 	from cStringIO import StringIO
@@ -61,6 +62,8 @@ class AbstractPDFExtractor(object):
 	thumbnail_width = 128
 	thumbnail_length = 128
 
+	use_ghostscript = True
+	
 	def __init__(self, data):
 		if hasattr(data, "read"):
 			self._data = data.read()
@@ -135,11 +138,19 @@ class AbstractPDFExtractor(object):
 			image_title = 'Page %d Preview' % page_number
 			image_thumb_id = '%d_thumb' % page_number
 			image_thumb_title = 'Page %d Thumbnail' % page_number
+
 			# create a file object to store the thumbnail and preview in
 			raw_image_thumb = StringIO()
 			raw_image_preview = StringIO()
+
 			# run ghostscript, convert pdf page into image
-			raw_image = self.ghostscript_transform(page_number)
+			if self.use_ghostscript:
+				raw_image = self.ghostscript_transform(page_number)
+			else:
+				raw_image = self.convert_transform(page_number)
+
+			if raw_image is None:
+				continue
 			# use PIL to generate thumbnail from image_result
 			try:
 				img_thumb = Image.open(StringIO(raw_image))
@@ -218,11 +229,43 @@ class AbstractPDFExtractor(object):
 			image_result = None
 		return image_result
 
+	def convert_transform(self, page_num, data=None):
+		"""
+		run the imagemagick convert command on the pdf file, capture the output
+		png file of the specified page number
+		"""
+		data = self.data if data is None else data
+		try:
+			tmp_dir = tempfile.mkdtemp(dir="/tmp")
+			name = tempfile.mkstemp(dir=tmp_dir)[1]
+			with open(name, "wb") as fp:
+				fp.write(data)
+			png_file = '%s.png' % name
+			convert_cmd = [
+				'convert',
+				'-background white',
+				'-alpha remove',
+				'%s[%s]' % (name, page_num-1),
+				'%s'  % png_file,
+			]
+			image_result = None
+			return_code = os.system(' '.join(convert_cmd))
+			if return_code == 0:
+				logger.info('convert processed one page of a pdf file.')
+				with open(png_file, "r") as fp:
+					image_result = fp.read()
+			else:
+				logger.warn('convert process did not exit cleanly! '
+							'Error Code: %s', return_code)
+				image_result = None
+			return image_result
+		finally:
+			shutil.rmtree(tmp_dir, True)
+
 class FilePDFExtractor(AbstractPDFExtractor):
 
 	def __init__(self, data):
-		super(FilePDFExtractor, self).__init__(data)
-		assert isinstance(data, string_types)
+		super(FilePDFExtractor, self).__init__(os.path.expanduser(data))
 
 	@property
 	def data(self):
