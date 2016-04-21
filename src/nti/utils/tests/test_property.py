@@ -14,6 +14,7 @@ from hamcrest import has_property
 import unittest
 
 from zope import interface
+
 from zope.annotation import interfaces as an_interfaces
 
 from nti.utils.property import annotation_alias

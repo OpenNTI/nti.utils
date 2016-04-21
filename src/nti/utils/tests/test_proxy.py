@@ -10,6 +10,7 @@ __docformat__ = "restructuredtext en"
 from hamcrest import is_
 from hamcrest import assert_that
 from hamcrest import same_instance
+from nti.testing.matchers import aq_inContextOf
 
 import unittest
 
@@ -44,8 +45,6 @@ except ImportError:
 		return IM()
 
 from nti.common.proxy import removeAllProxies
-
-from nti.testing.matchers import aq_inContextOf
 
 class TestProxy(unittest.TestCase):
 	
