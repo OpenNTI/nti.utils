@@ -21,14 +21,23 @@ def suffix_acronyms():
 def suffix_not_acronyms():
 	return set(getattr(nameparser_config, 'SUFFIX_NOT_ACRONYMS', None) or ())
 
-def constants():
-	suffixes = suffixes() # nameparser 0.3.X
-	if suffixes:
-		suffixes = suffixes | set(('cfa',))
-		constants = nameparser_config.Constants(suffixes=suffixes)
+def all_prefixes():
+	return set(getattr(nameparser_config, 'PREFIXES', None) or ())
+
+def all_suffixes():
+	return suffixes() | suffix_acronyms() | suffix_not_acronyms()
+
+def constants(prefixes=(), extra_suffixes=()):
+	v3_suffixes = suffixes()  # nameparser 0.3.X
+	prefixes = all_prefixes() if not prefixes else prefixes
+	extra_suffixes = () if not extra_suffixes else extra_suffixes
+	if v3_suffixes:  # nameparser 0.3.X
+		v3_suffixes = v3_suffixes | set(extra_suffixes)
+		constants = nameparser_config.Constants(prefixes=prefixes, suffixes=v3_suffixes)
 	else:
 		suffix_not_acronyms = suffix_not_acronyms()
-		suffix_acronyms = suffix_acronyms() | set(('cfa',))
-		constants = nameparser_config.Constants(suffix_acronyms=suffix_acronyms,
+		suffix_acronyms = suffix_acronyms() | set(extra_suffixes)
+		constants = nameparser_config.Constants(prefixes=prefixes,
+												suffix_acronyms=suffix_acronyms,
 												suffix_not_acronyms=suffix_not_acronyms)
 	return constants
