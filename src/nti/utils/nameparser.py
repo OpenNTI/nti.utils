@@ -35,9 +35,9 @@ def constants(prefixes=(), extra_suffixes=()):
 		v3_suffixes = v3_suffixes | set(extra_suffixes)
 		constants = nameparser_config.Constants(prefixes=prefixes, suffixes=v3_suffixes)
 	else:
-		suffix_not_acronyms = suffix_not_acronyms()
-		suffix_acronyms = suffix_acronyms() | set(extra_suffixes)
+		not_acronyms = suffix_not_acronyms()
+		acronyms = suffix_acronyms() | set(extra_suffixes)
 		constants = nameparser_config.Constants(prefixes=prefixes,
-												suffix_acronyms=suffix_acronyms,
-												suffix_not_acronyms=suffix_not_acronyms)
+												suffix_acronyms=acronyms,
+												suffix_not_acronyms=not_acronyms)
 	return constants
