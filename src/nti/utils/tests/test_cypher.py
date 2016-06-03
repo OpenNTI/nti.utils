@@ -13,6 +13,10 @@ from hamcrest import assert_that
 
 import unittest
 
+from nti.utils.cypher import new_key
+from nti.utils.cypher import encrypt
+from nti.utils.cypher import decrypt
+
 from nti.utils.cypher import get_plaintext
 from nti.utils.cypher import make_ciphertext
 
@@ -24,3 +28,11 @@ class TestCypher(unittest.TestCase):
 		assert_that(ciphertext, is_not(text))
 		plaintext = get_plaintext(ciphertext)
 		assert_that(plaintext, is_(text))
+		
+	def test_rsa_alg(self):
+		text = 'abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()'
+		n, e, d = new_key(10 ** 100, 10 ** 101, 50)
+		cipher = encrypt(text, n, e)
+		assert_that(cipher, is_not(text))
+		deciphered = decrypt(cipher, n, d)
+		assert_that(deciphered, is_(text))

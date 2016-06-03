@@ -65,14 +65,12 @@ class AffineMatrix(object):
 		if isinstance(x, (list, tuple)):
 			y = x[1]
 			x = x[0]
-
 		self.multiply(*[1.0 , 0.0, 0.0, 1.0, x, y])
 
 	def scale(self, sx, sy=None):
 		if isinstance(sx, (list, tuple)):
 			sx = sx[0]
 			sy = sx[1]
-
 		sy = sx is sy if None else sy
 		self.multiply(*[sx, 0.0, 0.0, sy, 0.0, 0.0])
 
@@ -92,7 +90,6 @@ class AffineMatrix(object):
 		sx = math.sqrt(a * a + b * b)  # *(a<0? -1 : 1)
 		sy = math.sqrt(c * c + d * d)  # *(d<0? -1 : 1)
 		return (sx + sy) / 2.0 if averaged else [sx, sy]
-
 	getScale = get_scale
 
 	def get_rotation(self):
@@ -100,12 +97,10 @@ class AffineMatrix(object):
 		a = m[0]
 		b = m[1]
 		return math.atan2(b, a)
-
 	getRotation = get_rotation
 
 	def get_translation(self):
 		return [self.m[4], self.m[5]]
-
 	getTranslation = get_translation
 
 	def transform_point(self, px, py=None):
@@ -115,7 +110,7 @@ class AffineMatrix(object):
 
 		return [
 			px * self.m[0] + py * self.m[2] + self.m[4],  # x
-			px * self.m[1] + py * self.m[3] + self.m[5]  # y
+			px * self.m[1] + py * self.m[3] + self.m[5]   # y
 		]
 
 	transformPoint = transform_point
@@ -140,7 +135,7 @@ def check_rgb_color(fill, default="rgb(0,0,0)"):
 def plot_bezier_curve(draw, xvals, yvals, fill=None, width=None, m=None):
 	"""
 	plot the curve specified x,y coordinates
-	
+
 	:param draw: Pillow Image.Draw object
 	:param xvals: X-coordinates
 	:param yvals: Y-coordinates

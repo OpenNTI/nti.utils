@@ -28,7 +28,6 @@ def _XOR(text, key):
 	for t in text:
 		t = chr(ord(t) ^ ord(next(key)))
 		result.append(t)
-
 	return b''.join(result)
 
 DEFAULT_PASSPHRASE = base64.b64decode('TjN4dFRoMHVnaHQhIUM=')
@@ -320,7 +319,3 @@ def decrypt(secret, modN, d, block_size=15):
 	num_blocks = [mod_exp(blocks, d, modN) for blocks in secret]
 	num_list = blocks_2_numlist(num_blocks, block_size)
 	return numlist_2_string(num_list)
-
-# n, e, d = new_key(10 ** 100, 10 ** 101, 50)
-# cipher = encrypt(message, n, e)
-# deciphered = decrypt(cipher, n, d)
