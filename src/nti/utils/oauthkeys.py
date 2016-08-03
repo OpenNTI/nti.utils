@@ -13,9 +13,10 @@ from zope import interface
 
 from nti.common.property import alias
 
+from nti.schema.eqhash import EqHash
+
 from nti.schema.fieldproperty import createDirectFieldProperties
 
-from nti.schema.schema import EqHash
 from nti.schema.schema import SchemaConfigured
 
 from nti.utils.cypher import get_plaintext
