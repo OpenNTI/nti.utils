@@ -71,6 +71,7 @@ setup(
 		'nti.common',
 		'nti.schema',
 		'nti.transactions',
+		'nti.zodb'
 		'pywikipedia'
 	],
 	extras_require={

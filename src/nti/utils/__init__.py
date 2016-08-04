@@ -18,5 +18,6 @@ from nti.common.gravatar import _AVATAR_SERVICES
 from nti.common.gravatar import KNOWN_GRAVATAR_TYPES
 from nti.common.gravatar import GENERATED_GRAVATAR_TYPES
 
-from nti.common.chameleon import make_cache_dir
 from nti.common.chameleon import setupChameleonCache
+
+from nti.zodb.common import make_cache_dir 
