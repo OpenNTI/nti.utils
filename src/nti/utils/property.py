@@ -12,7 +12,7 @@ logger = __import__('logging').getLogger(__name__)
 import zope.deferredimport
 zope.deferredimport.initialize()
 zope.deferredimport.deprecatedFrom(
-	"Moved to nti.common",
+	"Moved to nti.property",
 	"nti.property.property",
 	"alias",
 	"read_alias",
