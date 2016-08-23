@@ -66,7 +66,6 @@ setup(
 		'zope.schema',
 		'zope.security',
 		'zope.vocabularyregistry',
-		'nti.common',
 		'nti.property',
 		'nti.schema',
 		'pywikipedia'
