@@ -69,6 +69,7 @@ setup(
 		'zope.security',
 		'zope.vocabularyregistry',
 		'nti.common',
+		'nti.property',
 		'nti.schema',
 		'nti.transactions',
 		'nti.zodb',

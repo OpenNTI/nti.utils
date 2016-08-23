@@ -34,7 +34,7 @@ from PIL import Image
 from PyPDF2 import PdfFileReader
 from PyPDF2.utils import PdfReadError
 
-from nti.common.property import Lazy
+from nti.property.property import Lazy
 
 # constants
 inch = 72.0
