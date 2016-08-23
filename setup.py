@@ -50,15 +50,13 @@ setup(
 	tests_require=TESTS_REQUIRE,
 	install_requires=[
 		'setuptools',
-		'Acquisition',
 		'Babel',
-		'ExtensionClass',
-		'gevent',
-		'greenlet',
 		'lingua',
-		'numpy' if not IS_PYPY else '',
+		'nameparser',
+		'Pillow',
 		'plone.i18n',
-		'zope.annotation',
+		'PyPDF2',
+		'redis',
 		'zope.component',
 		'zope.configuration',
 		'zope.deferredimport',
@@ -71,8 +69,6 @@ setup(
 		'nti.common',
 		'nti.property',
 		'nti.schema',
-		'nti.transactions',
-		'nti.zodb',
 		'pywikipedia'
 	],
 	extras_require={
