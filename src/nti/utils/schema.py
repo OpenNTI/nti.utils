@@ -15,8 +15,8 @@ import zope.deferredimport
 zope.deferredimport.initialize()
 
 zope.deferredimport.deprecatedFrom(
-	"Moved to nti.dataserver_core.schema",
-	"nti.dataserver_core.schema",
+	"Moved to nti.coremetadata.schema",
+	"nti.coremetadata.schema",
 	"DataURI"
 )
 
