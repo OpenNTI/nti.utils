@@ -53,7 +53,6 @@ setup(
 		'Babel',
 		'lingua',
 		'nameparser',
-		'Pillow',
 		'plone.i18n',
 		'PyPDF2',
 		'redis',
