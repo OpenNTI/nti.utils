@@ -25,6 +25,7 @@ class _FakeOptions(object):
 
 	domain = None
 	keywords = ()
+	comment_tag = None
 	def __init__(self):
 		pass
 
