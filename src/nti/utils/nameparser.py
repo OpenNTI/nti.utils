@@ -22,12 +22,12 @@ def suffix_not_acronyms():
     return suffixes.SUFFIX_NOT_ACRONYMS
 
 
-def suffixes():
+def get_suffixes():
     return suffix_acronyms() | suffix_not_acronyms()
 
 
 def all_suffixes():
-    return suffixes() | suffix_acronyms() | suffix_not_acronyms()
+    return get_suffixes() | suffix_acronyms() | suffix_not_acronyms()
 
 
 def all_prefixes():
