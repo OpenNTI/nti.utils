@@ -24,7 +24,8 @@ def _XOR(text, key):
     for t in text:
         t = chr(ord(t) ^ ord(next(key)))
         result.append(t)
-    return b''.join(result)
+    return u''.join(result)
+
 
 DEFAULT_PASSPHRASE = base64.b64decode('TjN4dFRoMHVnaHQhIUM=')
 
