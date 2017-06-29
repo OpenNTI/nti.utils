@@ -52,8 +52,6 @@ setup(
 		'setuptools',
 		'Babel',
 		'lingua',
-		'nameparser',
-		'plone.i18n',
 		'PyPDF2',
 		'redis',
 		'zope.component',
