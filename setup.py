@@ -49,7 +49,6 @@ setup(
 		'setuptools',
 		'Babel',
 		'lingua',
-		'pywikipedia',
 		'zope.component',
 		'zope.deferredimport',
 		'zope.deprecation',
