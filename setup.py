@@ -8,9 +8,6 @@ entry_points = {
 	],
 }
 
-import platform
-py_impl = getattr(platform, 'python_implementation', lambda: None)
-IS_PYPY = py_impl() == 'PyPy'
 
 TESTS_REQUIRE = [
 	'nose',
@@ -52,20 +49,13 @@ setup(
 		'setuptools',
 		'Babel',
 		'lingua',
-		'PyPDF2',
-		'redis',
+		'pywikipedia',
 		'zope.component',
-		'zope.configuration',
 		'zope.deferredimport',
 		'zope.deprecation',
 		'zope.interface',
-		'zope.i18nmessageid',
-		'zope.schema',
 		'zope.security',
 		'zope.vocabularyregistry',
-		'nti.property',
-		'nti.schema',
-		'pywikipedia'
 	],
 	extras_require={
 		'test': TESTS_REQUIRE,

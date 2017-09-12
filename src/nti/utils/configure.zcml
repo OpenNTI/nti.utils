@@ -9,7 +9,5 @@
 	<include package="zope.security" />
 	
 	<include package="zope.vocabularyregistry" />
-	
-	<include package="nti.schema" />
 
 </configure>
