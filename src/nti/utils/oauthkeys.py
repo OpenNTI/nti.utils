@@ -11,7 +11,9 @@ logger = __import__('logging').getLogger(__name__)
 
 from zope import interface
 
-from nti.base._compat import unicode_
+from nti.base._compat import text_
+
+from nti.common.cypher import get_plaintext
 
 from nti.property.property import alias
 
@@ -20,8 +22,6 @@ from nti.schema.eqhash import EqHash
 from nti.schema.fieldproperty import createDirectFieldProperties
 
 from nti.schema.schema import SchemaConfigured
-
-from nti.utils.cypher import get_plaintext
 
 from nti.utils.interfaces import IOAuthKeys
 
@@ -45,7 +45,7 @@ class OAuthKeys(SchemaConfigured):
         if name in ("apiKey", "APIKey", "secretKey", "SecretKey"):
             try:
                 key = get_plaintext(value)
-                value = unicode_(key)
+                value = text_(key)
             except (TypeError, StandardError):
                 pass
         return SchemaConfigured.__setattr__(self, name, value)
