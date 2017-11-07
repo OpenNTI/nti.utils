@@ -29,13 +29,13 @@ class _FakeOptions(object):
 
     domain = None
     keywords = ()
-    comment_tag = None
+    comment_tag = comment_tags = None
 
     def __init__(self):
         pass
 
 
-def _extract_from(extractor, fileobj, keywords, comment_tags, options):
+def _extract_from(extractor, fileobj, keywords=(), comment_tags=(), options=()):
     __traceback_info__ = keywords, comment_tags, options
     # cannot pass babel's default keywords: they conflict; specifically,
     # it passes _, but python.py needs to see that as parse_translationstring
@@ -45,13 +45,13 @@ def _extract_from(extractor, fileobj, keywords, comment_tags, options):
         yield message.location[1], None, message.msgid, message.comment
 
 
-def extract_python(fileobj, keywords, comment_tags, options):
+def extract_python(fileobj, keywords=(), comment_tags=(), options=()):
     return _extract_from(PythonExtractor, fileobj, keywords, comment_tags, options)
 
 
-def extract_xml(fileobj, keywords, comment_tags, options):
+def extract_xml(fileobj, keywords=(), comment_tags=(), options=()):
     return _extract_from(ZopeExtractor, fileobj, keywords, comment_tags, options)
 
 
-def extract_zcml(fileobj, keywords, comment_tags, options):
+def extract_zcml(fileobj, keywords=(), comment_tags=(), options=()):
     return _extract_from(ZCMLExtractor, fileobj, keywords, comment_tags, options)

@@ -8,7 +8,9 @@ entry_points = {
 
 
 TESTS_REQUIRE = [
+    'six',
     'nti.testing',
+    'zope.dottedname',
     'zope.testrunner',
 ]
 
@@ -53,7 +55,6 @@ setup(
         'zope.deferredimport',
         'zope.deprecation',
         'zope.interface',
-        'zope.security',
     ],
     extras_require={
         'test': TESTS_REQUIRE,
