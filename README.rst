@@ -7,4 +7,3 @@
 
 .. image:: https://coveralls.io/repos/github/NextThought/nti.utils/badge.svg?branch=master
     :target: https://coveralls.io/github/NextThought/nti.utils?branch=master
-

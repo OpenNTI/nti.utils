@@ -6,10 +6,9 @@ Tools to help us use Babel, especially with updated lingua versions.
 .. $Id$
 """
 
-from __future__ import print_function, absolute_import, division
-__docformat__ = "restructuredtext en"
-
-logger = __import__('logging').getLogger(__name__)
+from __future__ import division
+from __future__ import print_function
+from __future__ import absolute_import
 
 # lingua 2.x and 3.x change their extraction callables
 # to not be compatible with Bable 1.3 anymore, however
@@ -22,6 +21,8 @@ from lingua.extractors.python import PythonExtractor
 from lingua.extractors.xml import ZopeExtractor
 
 from lingua.extractors.zcml import ZCMLExtractor
+
+logger = __import__('logging').getLogger(__name__)
 
 
 class _FakeOptions(object):
