@@ -16,9 +16,7 @@ from zope.dottedname import resolve as dottedname
 
 
 def create_module(location):
-    try:
-        __import__(location)
-    except ImportError:
+    if location not in sys.modules:
         module = types.ModuleType(str(location), "Created module")
         sys.modules[location] = module
 
