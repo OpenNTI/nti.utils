@@ -50,7 +50,7 @@ setup(
     install_requires=[
         'setuptools',
         'Babel',
-        'lingua',
+        'lingua[chameleonextractor]',
         'zope.component',
         'zope.deferredimport',
         'zope.deprecation',
